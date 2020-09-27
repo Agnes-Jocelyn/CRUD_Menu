@@ -12,6 +12,7 @@
 <body>
     <?php include 'Query.php'; ?>
 
+
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
@@ -21,22 +22,18 @@
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         <div class="form-group">
                             <label> Menu Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter menu name" value="<?php echo $name; ?>">
+                            <input type="text" class="form-control" name="name" placeholder="Enter menu name">
                         </div>
                         <div class=" form-group">
                             <label> Menu Stock</label>
-                            <input type="number" class="form-control" name="stock" placeholder="Enter menu stock" value="<?php echo $stock; ?>">
+                            <input type="number" class="form-control" name="stock" placeholder="Enter menu stock">
                         </div>
                         <div class="form-group">
                             <label> Menu Price</label>
-                            <input type="number" class="form-control" name="price" placeholder="Enter menu price" value="<?php echo $price; ?>">
+                            <input type="number" class="form-control" name="price" placeholder="Enter menu price">
                         </div>
                         <div class="form-group">
-                            <?php if ($update == true): ?>
-                                <button type="submit" class="btn btn-info" name="update">Update</button>
-                            <?php else: ?>
-                                <button type="submit" class="btn btn-info" name="save">Save</button>
-                            <?php endif; ?>
+                            <button type="submit" class="btn btn-info" name="save">Save</button>
                         </div>
                     </form>
                 </div>
@@ -44,7 +41,7 @@
 
             <!-- table -->
             <div class="col-md-6">
-                <table class="table"> 
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Menu Name</th>
@@ -57,25 +54,23 @@
                     include 'Process.php';
                     ($list = mysqli_query($mysqli, 'SELECT * from menu')) or
                         die($mysqli->error);
-                    while ($row = $list->fetch_assoc()): ?>
+                    while ($row = $list->fetch_assoc()) : ?>
                         <tr>
                             <td><?php echo $row['name']; ?></td>
                             <td><?php echo $row['stock']; ?></td>
                             <td><?php echo $row['price']; ?></td>
                             <td>
-                                <a href="index.php?edit=<?php echo $row[
-                                    'id'
-                                ]; ?>" class="btn btn-info"> Edit</a>
-                                <a href="Query.php?delete=<?php echo $row[
-                                    'id'
-                                ]; ?>" onclick="return confirm('Do you want to delete this?');" class="btn btn-danger"> Delete</a>
+                                <a href="Modal.php?id=<?php echo $row['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Edit</a>
+                                <a href="Query.php?delete=<?php echo $row['id']; ?>" onclick="return confirm('Do you want to delete this?');" class="btn btn-danger"> Delete</a>
                             </td>
                         </tr>
                     <?php endwhile;
                     ?>
                 </table>
-                
-            </div>            
+            </div>
+            <?php include 'Modal.php'; ?>
+
+
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

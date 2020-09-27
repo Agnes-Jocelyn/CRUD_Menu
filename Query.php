@@ -23,27 +23,27 @@ if (isset($_POST['save'])) {
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    mysqli_query($mysqli, "DELETE from menu WHERE id=$id");
+    mysqli_query($mysqli, "DELETE FROM menu WHERE id=$id");
 
     header('location:Index.php');
 }
 
-if (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
-    $update = true;
-    $result = mysqli_query($mysqli, "SELECT * from menu WHERE id=$id");
-    print_r($result);
+// if (isset($_GET['edit'])) {
+//     $id = $_GET['edit'];
+//     $update = true;
+//     $result = mysqli_query($mysqli, "SELECT * FROM menu WHERE id=$id");
+//     print_r($result);
 
-    if ($result->num_rows) {
-        $row = $result->fetch_array();
-        $name = $row['name'];
-        $stock = $row['stock'];
-        $price = $row['price'];
-    }
-}
+//     if ($result->num_rows) {
+//         $row = $result->fetch_array();
+//         $name = $row['name'];
+//         $stock = $row['stock'];
+//         $price = $row['price'];
+//     }
+// }
 
 if (isset($_POST['update'])) {
-    $id = $_POST['update'];
+    $id = $_POST['id'];
     $name = $_POST['name'];
     $stock = $_POST['stock'];
     $price = $_POST['price'];
@@ -52,5 +52,5 @@ if (isset($_POST['update'])) {
         $mysqli,
         "UPDATE menu SET name='$name', stock='$stock', price='$price' WHERE id=$id"
     );
-    // header('location:index.php');
+    header('location:index.php');
 }
