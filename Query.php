@@ -28,19 +28,18 @@ if (isset($_GET['delete'])) {
     header('location:Index.php');
 }
 
-// if (isset($_GET['edit'])) {
-//     $id = $_GET['edit'];
-//     $update = true;
-//     $result = mysqli_query($mysqli, "SELECT * FROM menu WHERE id=$id");
-//     print_r($result);
+if (isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    $update = true;
+    $result = mysqli_query($mysqli, "SELECT * FROM menu WHERE id=$id");
 
-//     if ($result->num_rows) {
-//         $row = $result->fetch_array();
-//         $name = $row['name'];
-//         $stock = $row['stock'];
-//         $price = $row['price'];
-//     }
-// }
+    if ($result->num_rows) {
+        $row = $result->fetch_array();
+        $name = $row['name'];
+        $stock = $row['stock'];
+        $price = $row['price'];
+    }
+}
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];

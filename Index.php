@@ -22,19 +22,23 @@
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         <div class="form-group">
                             <label> Menu Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter menu name">
+                            <input type="text" class="form-control" name="name" placeholder="Enter menu name" value="<?php echo $name; ?>">
                         </div>
                         <div class=" form-group">
                             <label> Menu Stock</label>
-                            <input type="number" class="form-control" name="stock" placeholder="Enter menu stock">
+                            <input type="number" class="form-control" name="stock" placeholder="Enter menu stock" value="<?php echo $stock; ?>">
                         </div>
                         <div class="form-group">
                             <label> Menu Price</label>
-                            <input type="number" class="form-control" name="price" placeholder="Enter menu price">
+                            <input type="number" class="form-control" name="price" placeholder="Enter menu price" value="<?php echo $price; ?>">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info" name="save">Save</button>
-                        </div>
+                <?php if ($update == true): ?>
+                    <button type="submit" class="btn btn-info" name="update">Update</button>
+                <?php else: ?>
+                    <button type="submit" class="btn btn-info" name="save">Save</button>
+                <?php endif; ?>
+            </div>
                     </form>
                 </div>
             </div>
@@ -54,21 +58,26 @@
                     include 'Process.php';
                     ($list = mysqli_query($mysqli, 'SELECT * from menu')) or
                         die($mysqli->error);
-                    while ($row = $list->fetch_assoc()) : ?>
+                    while ($row = $list->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo $row['name']; ?></td>
                             <td><?php echo $row['stock']; ?></td>
                             <td><?php echo $row['price']; ?></td>
                             <td>
-                                <a href="Modal.php?id=<?php echo $row['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Edit</a>
-                                <a href="Query.php?delete=<?php echo $row['id']; ?>" onclick="return confirm('Do you want to delete this?');" class="btn btn-danger"> Delete</a>
+                            <a href="index.php?edit=<?php echo $row[
+                                'id'
+                            ]; ?>" class="btn btn-info">
+                                Edit
+                            </a>
+                                <a href="Query.php?delete=<?php echo $row[
+                                    'id'
+                                ]; ?>" onclick="return confirm('Do you want to delete this?');" class="btn btn-danger"> Delete</a>
                             </td>
                         </tr>
                     <?php endwhile;
                     ?>
                 </table>
             </div>
-            <?php include 'Modal.php'; ?>
 
 
         </div>
